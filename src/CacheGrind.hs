@@ -1,4 +1,4 @@
-module CacheGrind where
+module Main where
 
 import           Control.Monad                 (liftM)
 import           Data.List                     (sortBy)
@@ -117,9 +117,12 @@ processFile FileProfile { file = f, functionProfiles = p } =
 processCG CacheGrind { fileProfiles = f } =
   let sorted = sortBy (\(_,(_,(_,a))) (_,(_,(_,b))) -> compare b a) (concatMap processFile f)
   in map (\(a,(b,(c,d))) -> (a, b, c, d)) sorted
-     
+
 test = do
   contents <- readFile "data/cachegrind.out.16478"
+
+main = do
+  contents <- getContents
   case parse header "test" contents of
     Left e -> print e
     Right r -> mapM_ print $ take 50 $ processCG r
