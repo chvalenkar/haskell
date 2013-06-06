@@ -123,20 +123,3 @@ test = do
   case parse header "test" contents of
     Left e -> print e
     Right r -> mapM_ print $ take 50 $ processCG r
-
-
-
-
-
-
-
-
-
-
---desc: I1 cache:         67108864 B, 64 B, 4-way associative
---desc: D1 cache:         32768 B, 64 B, 2-way associative
---desc: LL cache:         262144 B, 128 B, 4-way associative
---cmd: ./lteDo/exec/onesct/release/appHtEnvFaraday --port 12345
---events: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
-
-
