@@ -120,7 +120,10 @@ processCG CacheGrind { fileProfiles = f } =
 
 test = do
   contents <- readFile "data/cachegrind.out.16478"
-
+  case parse header "test" contents of
+    Left e -> print e
+    Right r -> mapM_ print $ take 50 $ processCG r
+  
 main = do
   contents <- getContents
   case parse header "test" contents of
